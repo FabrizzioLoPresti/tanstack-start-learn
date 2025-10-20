@@ -1,4 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
+import { json } from '@tanstack/react-start'
 
 export const Route = createFileRoute('/api/users')({
   server: {
@@ -8,16 +9,11 @@ export const Route = createFileRoute('/api/users')({
           'https://jsonplaceholder.typicode.com/users',
         )
         const users = await fetchUsers.json()
-        return new Response(JSON.stringify(users), {
-          headers: { 'Content-Type': 'application/json' },
-        })
+        return json(users)
       },
       POST: async ({ request }) => {
-        // Here you would normally handle creating a new user
         const newUser = await request.json()
-        return new Response(JSON.stringify(newUser), {
-          headers: { 'Content-Type': 'application/json' },
-        })
+        return json(newUser)
       },
     },
   },
