@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CoursesIndexRouteImport } from './routes/courses/index'
 import { Route as DemoTanstackQueryRouteImport } from './routes/demo/tanstack-query'
 import { Route as DemoPrismaRouteImport } from './routes/demo/prisma'
 import { Route as DemoOrpcTodoRouteImport } from './routes/demo/orpc-todo'
@@ -35,6 +36,11 @@ import { Route as DemoStartSsrDataOnlyRouteImport } from './routes/demo/start.ss
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CoursesIndexRoute = CoursesIndexRouteImport.update({
+  id: '/courses/',
+  path: '/courses/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DemoTanstackQueryRoute = DemoTanstackQueryRouteImport.update({
@@ -156,6 +162,7 @@ export interface FileRoutesByFullPath {
   '/demo/orpc-todo': typeof DemoOrpcTodoRoute
   '/demo/prisma': typeof DemoPrismaRoute
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
+  '/courses': typeof CoursesIndexRoute
   '/api/rpc/$': typeof ApiRpcSplatRoute
   '/courses/fetch-loader-data-params/$userId': typeof CoursesFetchLoaderDataParamsUserIdRoute
   '/demo/api/names': typeof DemoApiNamesRoute
@@ -180,6 +187,7 @@ export interface FileRoutesByTo {
   '/demo/orpc-todo': typeof DemoOrpcTodoRoute
   '/demo/prisma': typeof DemoPrismaRoute
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
+  '/courses': typeof CoursesIndexRoute
   '/api/rpc/$': typeof ApiRpcSplatRoute
   '/courses/fetch-loader-data-params/$userId': typeof CoursesFetchLoaderDataParamsUserIdRoute
   '/demo/api/names': typeof DemoApiNamesRoute
@@ -205,6 +213,7 @@ export interface FileRoutesById {
   '/demo/orpc-todo': typeof DemoOrpcTodoRoute
   '/demo/prisma': typeof DemoPrismaRoute
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
+  '/courses/': typeof CoursesIndexRoute
   '/api/rpc/$': typeof ApiRpcSplatRoute
   '/courses/fetch-loader-data-params/$userId': typeof CoursesFetchLoaderDataParamsUserIdRoute
   '/demo/api/names': typeof DemoApiNamesRoute
@@ -231,6 +240,7 @@ export interface FileRouteTypes {
     | '/demo/orpc-todo'
     | '/demo/prisma'
     | '/demo/tanstack-query'
+    | '/courses'
     | '/api/rpc/$'
     | '/courses/fetch-loader-data-params/$userId'
     | '/demo/api/names'
@@ -255,6 +265,7 @@ export interface FileRouteTypes {
     | '/demo/orpc-todo'
     | '/demo/prisma'
     | '/demo/tanstack-query'
+    | '/courses'
     | '/api/rpc/$'
     | '/courses/fetch-loader-data-params/$userId'
     | '/demo/api/names'
@@ -279,6 +290,7 @@ export interface FileRouteTypes {
     | '/demo/orpc-todo'
     | '/demo/prisma'
     | '/demo/tanstack-query'
+    | '/courses/'
     | '/api/rpc/$'
     | '/courses/fetch-loader-data-params/$userId'
     | '/demo/api/names'
@@ -304,6 +316,7 @@ export interface RootRouteChildren {
   DemoOrpcTodoRoute: typeof DemoOrpcTodoRoute
   DemoPrismaRoute: typeof DemoPrismaRoute
   DemoTanstackQueryRoute: typeof DemoTanstackQueryRoute
+  CoursesIndexRoute: typeof CoursesIndexRoute
   ApiRpcSplatRoute: typeof ApiRpcSplatRoute
   CoursesFetchLoaderDataParamsUserIdRoute: typeof CoursesFetchLoaderDataParamsUserIdRoute
   DemoApiNamesRoute: typeof DemoApiNamesRoute
@@ -326,6 +339,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/courses/': {
+      id: '/courses/'
+      path: '/courses'
+      fullPath: '/courses'
+      preLoaderRoute: typeof CoursesIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/demo/tanstack-query': {
@@ -489,6 +509,7 @@ const rootRouteChildren: RootRouteChildren = {
   DemoOrpcTodoRoute: DemoOrpcTodoRoute,
   DemoPrismaRoute: DemoPrismaRoute,
   DemoTanstackQueryRoute: DemoTanstackQueryRoute,
+  CoursesIndexRoute: CoursesIndexRoute,
   ApiRpcSplatRoute: ApiRpcSplatRoute,
   CoursesFetchLoaderDataParamsUserIdRoute:
     CoursesFetchLoaderDataParamsUserIdRoute,
