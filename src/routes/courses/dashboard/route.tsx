@@ -15,6 +15,9 @@ function RouteComponent() {
           <li>
             <Link to="/courses/dashboard/settings">Settings</Link>
           </li>
+          <li>
+            <Link to="/courses/dashboard/test">Layout Test</Link>
+          </li>
         </ul>
       </nav>
       <Outlet />

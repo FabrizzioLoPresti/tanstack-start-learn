@@ -30,11 +30,13 @@ import { Route as DemoApiTqTodosRouteImport } from './routes/demo/api.tq-todos'
 import { Route as DemoApiNamesRouteImport } from './routes/demo/api.names'
 import { Route as CoursesFetchLoaderDataParamsUserIdRouteImport } from './routes/courses/fetch-loader-data-params.$userId'
 import { Route as CoursesDashboardSettingsRouteImport } from './routes/courses/dashboard/settings'
+import { Route as CoursesDashboardLayoutRouteImport } from './routes/courses/dashboard/_layout'
 import { Route as ApiRpcSplatRouteImport } from './routes/api.rpc.$'
 import { Route as DemoStartSsrIndexRouteImport } from './routes/demo/start.ssr.index'
 import { Route as DemoStartSsrSpaModeRouteImport } from './routes/demo/start.ssr.spa-mode'
 import { Route as DemoStartSsrFullSsrRouteImport } from './routes/demo/start.ssr.full-ssr'
 import { Route as DemoStartSsrDataOnlyRouteImport } from './routes/demo/start.ssr.data-only'
+import { Route as CoursesDashboardLayoutTestRouteImport } from './routes/courses/dashboard/_layout.test'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -145,6 +147,10 @@ const CoursesDashboardSettingsRoute =
     path: '/settings',
     getParentRoute: () => CoursesDashboardRouteRoute,
   } as any)
+const CoursesDashboardLayoutRoute = CoursesDashboardLayoutRouteImport.update({
+  id: '/_layout',
+  getParentRoute: () => CoursesDashboardRouteRoute,
+} as any)
 const ApiRpcSplatRoute = ApiRpcSplatRouteImport.update({
   id: '/api/rpc/$',
   path: '/api/rpc/$',
@@ -170,10 +176,16 @@ const DemoStartSsrDataOnlyRoute = DemoStartSsrDataOnlyRouteImport.update({
   path: '/demo/start/ssr/data-only',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CoursesDashboardLayoutTestRoute =
+  CoursesDashboardLayoutTestRouteImport.update({
+    id: '/test',
+    path: '/test',
+    getParentRoute: () => CoursesDashboardLayoutRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/courses/dashboard': typeof CoursesDashboardRouteRouteWithChildren
+  '/courses/dashboard': typeof CoursesDashboardLayoutRouteWithChildren
   '/api/$': typeof ApiSplatRoute
   '/courses/about': typeof CoursesAboutRoute
   '/courses/fetch-loader-data': typeof CoursesFetchLoaderDataRoute
@@ -194,6 +206,7 @@ export interface FileRoutesByFullPath {
   '/demo/start/api-request': typeof DemoStartApiRequestRoute
   '/demo/start/server-funcs': typeof DemoStartServerFuncsRoute
   '/courses/dashboard/': typeof CoursesDashboardIndexRoute
+  '/courses/dashboard/test': typeof CoursesDashboardLayoutTestRoute
   '/demo/start/ssr/data-only': typeof DemoStartSsrDataOnlyRoute
   '/demo/start/ssr/full-ssr': typeof DemoStartSsrFullSsrRoute
   '/demo/start/ssr/spa-mode': typeof DemoStartSsrSpaModeRoute
@@ -211,6 +224,7 @@ export interface FileRoutesByTo {
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
   '/courses': typeof CoursesIndexRoute
   '/api/rpc/$': typeof ApiRpcSplatRoute
+  '/courses/dashboard': typeof CoursesDashboardIndexRoute
   '/courses/dashboard/settings': typeof CoursesDashboardSettingsRoute
   '/courses/fetch-loader-data-params/$userId': typeof CoursesFetchLoaderDataParamsUserIdRoute
   '/demo/api/names': typeof DemoApiNamesRoute
@@ -220,7 +234,7 @@ export interface FileRoutesByTo {
   '/demo/sentry/testing': typeof DemoSentryTestingRoute
   '/demo/start/api-request': typeof DemoStartApiRequestRoute
   '/demo/start/server-funcs': typeof DemoStartServerFuncsRoute
-  '/courses/dashboard': typeof CoursesDashboardIndexRoute
+  '/courses/dashboard/test': typeof CoursesDashboardLayoutTestRoute
   '/demo/start/ssr/data-only': typeof DemoStartSsrDataOnlyRoute
   '/demo/start/ssr/full-ssr': typeof DemoStartSsrFullSsrRoute
   '/demo/start/ssr/spa-mode': typeof DemoStartSsrSpaModeRoute
@@ -240,6 +254,7 @@ export interface FileRoutesById {
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
   '/courses/': typeof CoursesIndexRoute
   '/api/rpc/$': typeof ApiRpcSplatRoute
+  '/courses/dashboard/_layout': typeof CoursesDashboardLayoutRouteWithChildren
   '/courses/dashboard/settings': typeof CoursesDashboardSettingsRoute
   '/courses/fetch-loader-data-params/$userId': typeof CoursesFetchLoaderDataParamsUserIdRoute
   '/demo/api/names': typeof DemoApiNamesRoute
@@ -250,6 +265,7 @@ export interface FileRoutesById {
   '/demo/start/api-request': typeof DemoStartApiRequestRoute
   '/demo/start/server-funcs': typeof DemoStartServerFuncsRoute
   '/courses/dashboard/': typeof CoursesDashboardIndexRoute
+  '/courses/dashboard/_layout/test': typeof CoursesDashboardLayoutTestRoute
   '/demo/start/ssr/data-only': typeof DemoStartSsrDataOnlyRoute
   '/demo/start/ssr/full-ssr': typeof DemoStartSsrFullSsrRoute
   '/demo/start/ssr/spa-mode': typeof DemoStartSsrSpaModeRoute
@@ -280,6 +296,7 @@ export interface FileRouteTypes {
     | '/demo/start/api-request'
     | '/demo/start/server-funcs'
     | '/courses/dashboard/'
+    | '/courses/dashboard/test'
     | '/demo/start/ssr/data-only'
     | '/demo/start/ssr/full-ssr'
     | '/demo/start/ssr/spa-mode'
@@ -297,6 +314,7 @@ export interface FileRouteTypes {
     | '/demo/tanstack-query'
     | '/courses'
     | '/api/rpc/$'
+    | '/courses/dashboard'
     | '/courses/dashboard/settings'
     | '/courses/fetch-loader-data-params/$userId'
     | '/demo/api/names'
@@ -306,7 +324,7 @@ export interface FileRouteTypes {
     | '/demo/sentry/testing'
     | '/demo/start/api-request'
     | '/demo/start/server-funcs'
-    | '/courses/dashboard'
+    | '/courses/dashboard/test'
     | '/demo/start/ssr/data-only'
     | '/demo/start/ssr/full-ssr'
     | '/demo/start/ssr/spa-mode'
@@ -325,6 +343,7 @@ export interface FileRouteTypes {
     | '/demo/tanstack-query'
     | '/courses/'
     | '/api/rpc/$'
+    | '/courses/dashboard/_layout'
     | '/courses/dashboard/settings'
     | '/courses/fetch-loader-data-params/$userId'
     | '/demo/api/names'
@@ -335,6 +354,7 @@ export interface FileRouteTypes {
     | '/demo/start/api-request'
     | '/demo/start/server-funcs'
     | '/courses/dashboard/'
+    | '/courses/dashboard/_layout/test'
     | '/demo/start/ssr/data-only'
     | '/demo/start/ssr/full-ssr'
     | '/demo/start/ssr/spa-mode'
@@ -517,6 +537,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CoursesDashboardSettingsRouteImport
       parentRoute: typeof CoursesDashboardRouteRoute
     }
+    '/courses/dashboard/_layout': {
+      id: '/courses/dashboard/_layout'
+      path: ''
+      fullPath: '/courses/dashboard'
+      preLoaderRoute: typeof CoursesDashboardLayoutRouteImport
+      parentRoute: typeof CoursesDashboardRouteRoute
+    }
     '/api/rpc/$': {
       id: '/api/rpc/$'
       path: '/api/rpc/$'
@@ -552,15 +579,38 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DemoStartSsrDataOnlyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/courses/dashboard/_layout/test': {
+      id: '/courses/dashboard/_layout/test'
+      path: '/test'
+      fullPath: '/courses/dashboard/test'
+      preLoaderRoute: typeof CoursesDashboardLayoutTestRouteImport
+      parentRoute: typeof CoursesDashboardLayoutRoute
+    }
   }
 }
 
+interface CoursesDashboardLayoutRouteChildren {
+  CoursesDashboardLayoutTestRoute: typeof CoursesDashboardLayoutTestRoute
+}
+
+const CoursesDashboardLayoutRouteChildren: CoursesDashboardLayoutRouteChildren =
+  {
+    CoursesDashboardLayoutTestRoute: CoursesDashboardLayoutTestRoute,
+  }
+
+const CoursesDashboardLayoutRouteWithChildren =
+  CoursesDashboardLayoutRoute._addFileChildren(
+    CoursesDashboardLayoutRouteChildren,
+  )
+
 interface CoursesDashboardRouteRouteChildren {
+  CoursesDashboardLayoutRoute: typeof CoursesDashboardLayoutRouteWithChildren
   CoursesDashboardSettingsRoute: typeof CoursesDashboardSettingsRoute
   CoursesDashboardIndexRoute: typeof CoursesDashboardIndexRoute
 }
 
 const CoursesDashboardRouteRouteChildren: CoursesDashboardRouteRouteChildren = {
+  CoursesDashboardLayoutRoute: CoursesDashboardLayoutRouteWithChildren,
   CoursesDashboardSettingsRoute: CoursesDashboardSettingsRoute,
   CoursesDashboardIndexRoute: CoursesDashboardIndexRoute,
 }
