@@ -1,4 +1,4 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute, Link } from '@tanstack/react-router'
 
 import {
   Zap,
@@ -71,6 +71,12 @@ function App() {
               </span>
             </h1>
           </div>
+          <Link
+            to="/courses/about"
+            className="px-4 py-2 bg-cyan-500 hover:bg-cyan-600 text-white font-semibold rounded-lg transition-colors"
+          >
+            Go to Courses About
+          </Link>
           <p className="text-2xl md:text-3xl text-gray-300 mb-4 font-light">
             The framework for next generation AI applications
           </p>

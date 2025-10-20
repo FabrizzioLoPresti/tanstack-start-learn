@@ -13,6 +13,10 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as DemoTanstackQueryRouteImport } from './routes/demo/tanstack-query'
 import { Route as DemoPrismaRouteImport } from './routes/demo/prisma'
 import { Route as DemoOrpcTodoRouteImport } from './routes/demo/orpc-todo'
+import { Route as CoursesFetchTanstackQueryMutationZodRouteImport } from './routes/courses/fetch-tanstack-query-mutation-zod'
+import { Route as CoursesFetchTanstackQueryRouteImport } from './routes/courses/fetch-tanstack-query'
+import { Route as CoursesFetchLoaderDataRouteImport } from './routes/courses/fetch-loader-data'
+import { Route as CoursesAboutRouteImport } from './routes/courses/about'
 import { Route as ApiSplatRouteImport } from './routes/api.$'
 import { Route as DemoStartServerFuncsRouteImport } from './routes/demo/start.server-funcs'
 import { Route as DemoStartApiRequestRouteImport } from './routes/demo/start.api-request'
@@ -21,6 +25,7 @@ import { Route as DemoFormSimpleRouteImport } from './routes/demo/form.simple'
 import { Route as DemoFormAddressRouteImport } from './routes/demo/form.address'
 import { Route as DemoApiTqTodosRouteImport } from './routes/demo/api.tq-todos'
 import { Route as DemoApiNamesRouteImport } from './routes/demo/api.names'
+import { Route as CoursesFetchLoaderDataParamsUserIdRouteImport } from './routes/courses/fetch-loader-data-params.$userId'
 import { Route as ApiRpcSplatRouteImport } from './routes/api.rpc.$'
 import { Route as DemoStartSsrIndexRouteImport } from './routes/demo/start.ssr.index'
 import { Route as DemoStartSsrSpaModeRouteImport } from './routes/demo/start.ssr.spa-mode'
@@ -45,6 +50,28 @@ const DemoPrismaRoute = DemoPrismaRouteImport.update({
 const DemoOrpcTodoRoute = DemoOrpcTodoRouteImport.update({
   id: '/demo/orpc-todo',
   path: '/demo/orpc-todo',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CoursesFetchTanstackQueryMutationZodRoute =
+  CoursesFetchTanstackQueryMutationZodRouteImport.update({
+    id: '/courses/fetch-tanstack-query-mutation-zod',
+    path: '/courses/fetch-tanstack-query-mutation-zod',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const CoursesFetchTanstackQueryRoute =
+  CoursesFetchTanstackQueryRouteImport.update({
+    id: '/courses/fetch-tanstack-query',
+    path: '/courses/fetch-tanstack-query',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const CoursesFetchLoaderDataRoute = CoursesFetchLoaderDataRouteImport.update({
+  id: '/courses/fetch-loader-data',
+  path: '/courses/fetch-loader-data',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CoursesAboutRoute = CoursesAboutRouteImport.update({
+  id: '/courses/about',
+  path: '/courses/about',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiSplatRoute = ApiSplatRouteImport.update({
@@ -87,6 +114,12 @@ const DemoApiNamesRoute = DemoApiNamesRouteImport.update({
   path: '/demo/api/names',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CoursesFetchLoaderDataParamsUserIdRoute =
+  CoursesFetchLoaderDataParamsUserIdRouteImport.update({
+    id: '/courses/fetch-loader-data-params/$userId',
+    path: '/courses/fetch-loader-data-params/$userId',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiRpcSplatRoute = ApiRpcSplatRouteImport.update({
   id: '/api/rpc/$',
   path: '/api/rpc/$',
@@ -116,10 +149,15 @@ const DemoStartSsrDataOnlyRoute = DemoStartSsrDataOnlyRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/api/$': typeof ApiSplatRoute
+  '/courses/about': typeof CoursesAboutRoute
+  '/courses/fetch-loader-data': typeof CoursesFetchLoaderDataRoute
+  '/courses/fetch-tanstack-query': typeof CoursesFetchTanstackQueryRoute
+  '/courses/fetch-tanstack-query-mutation-zod': typeof CoursesFetchTanstackQueryMutationZodRoute
   '/demo/orpc-todo': typeof DemoOrpcTodoRoute
   '/demo/prisma': typeof DemoPrismaRoute
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
   '/api/rpc/$': typeof ApiRpcSplatRoute
+  '/courses/fetch-loader-data-params/$userId': typeof CoursesFetchLoaderDataParamsUserIdRoute
   '/demo/api/names': typeof DemoApiNamesRoute
   '/demo/api/tq-todos': typeof DemoApiTqTodosRoute
   '/demo/form/address': typeof DemoFormAddressRoute
@@ -135,10 +173,15 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/api/$': typeof ApiSplatRoute
+  '/courses/about': typeof CoursesAboutRoute
+  '/courses/fetch-loader-data': typeof CoursesFetchLoaderDataRoute
+  '/courses/fetch-tanstack-query': typeof CoursesFetchTanstackQueryRoute
+  '/courses/fetch-tanstack-query-mutation-zod': typeof CoursesFetchTanstackQueryMutationZodRoute
   '/demo/orpc-todo': typeof DemoOrpcTodoRoute
   '/demo/prisma': typeof DemoPrismaRoute
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
   '/api/rpc/$': typeof ApiRpcSplatRoute
+  '/courses/fetch-loader-data-params/$userId': typeof CoursesFetchLoaderDataParamsUserIdRoute
   '/demo/api/names': typeof DemoApiNamesRoute
   '/demo/api/tq-todos': typeof DemoApiTqTodosRoute
   '/demo/form/address': typeof DemoFormAddressRoute
@@ -155,10 +198,15 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/api/$': typeof ApiSplatRoute
+  '/courses/about': typeof CoursesAboutRoute
+  '/courses/fetch-loader-data': typeof CoursesFetchLoaderDataRoute
+  '/courses/fetch-tanstack-query': typeof CoursesFetchTanstackQueryRoute
+  '/courses/fetch-tanstack-query-mutation-zod': typeof CoursesFetchTanstackQueryMutationZodRoute
   '/demo/orpc-todo': typeof DemoOrpcTodoRoute
   '/demo/prisma': typeof DemoPrismaRoute
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
   '/api/rpc/$': typeof ApiRpcSplatRoute
+  '/courses/fetch-loader-data-params/$userId': typeof CoursesFetchLoaderDataParamsUserIdRoute
   '/demo/api/names': typeof DemoApiNamesRoute
   '/demo/api/tq-todos': typeof DemoApiTqTodosRoute
   '/demo/form/address': typeof DemoFormAddressRoute
@@ -176,10 +224,15 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/api/$'
+    | '/courses/about'
+    | '/courses/fetch-loader-data'
+    | '/courses/fetch-tanstack-query'
+    | '/courses/fetch-tanstack-query-mutation-zod'
     | '/demo/orpc-todo'
     | '/demo/prisma'
     | '/demo/tanstack-query'
     | '/api/rpc/$'
+    | '/courses/fetch-loader-data-params/$userId'
     | '/demo/api/names'
     | '/demo/api/tq-todos'
     | '/demo/form/address'
@@ -195,10 +248,15 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/api/$'
+    | '/courses/about'
+    | '/courses/fetch-loader-data'
+    | '/courses/fetch-tanstack-query'
+    | '/courses/fetch-tanstack-query-mutation-zod'
     | '/demo/orpc-todo'
     | '/demo/prisma'
     | '/demo/tanstack-query'
     | '/api/rpc/$'
+    | '/courses/fetch-loader-data-params/$userId'
     | '/demo/api/names'
     | '/demo/api/tq-todos'
     | '/demo/form/address'
@@ -214,10 +272,15 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/api/$'
+    | '/courses/about'
+    | '/courses/fetch-loader-data'
+    | '/courses/fetch-tanstack-query'
+    | '/courses/fetch-tanstack-query-mutation-zod'
     | '/demo/orpc-todo'
     | '/demo/prisma'
     | '/demo/tanstack-query'
     | '/api/rpc/$'
+    | '/courses/fetch-loader-data-params/$userId'
     | '/demo/api/names'
     | '/demo/api/tq-todos'
     | '/demo/form/address'
@@ -234,10 +297,15 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ApiSplatRoute: typeof ApiSplatRoute
+  CoursesAboutRoute: typeof CoursesAboutRoute
+  CoursesFetchLoaderDataRoute: typeof CoursesFetchLoaderDataRoute
+  CoursesFetchTanstackQueryRoute: typeof CoursesFetchTanstackQueryRoute
+  CoursesFetchTanstackQueryMutationZodRoute: typeof CoursesFetchTanstackQueryMutationZodRoute
   DemoOrpcTodoRoute: typeof DemoOrpcTodoRoute
   DemoPrismaRoute: typeof DemoPrismaRoute
   DemoTanstackQueryRoute: typeof DemoTanstackQueryRoute
   ApiRpcSplatRoute: typeof ApiRpcSplatRoute
+  CoursesFetchLoaderDataParamsUserIdRoute: typeof CoursesFetchLoaderDataParamsUserIdRoute
   DemoApiNamesRoute: typeof DemoApiNamesRoute
   DemoApiTqTodosRoute: typeof DemoApiTqTodosRoute
   DemoFormAddressRoute: typeof DemoFormAddressRoute
@@ -279,6 +347,34 @@ declare module '@tanstack/react-router' {
       path: '/demo/orpc-todo'
       fullPath: '/demo/orpc-todo'
       preLoaderRoute: typeof DemoOrpcTodoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/courses/fetch-tanstack-query-mutation-zod': {
+      id: '/courses/fetch-tanstack-query-mutation-zod'
+      path: '/courses/fetch-tanstack-query-mutation-zod'
+      fullPath: '/courses/fetch-tanstack-query-mutation-zod'
+      preLoaderRoute: typeof CoursesFetchTanstackQueryMutationZodRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/courses/fetch-tanstack-query': {
+      id: '/courses/fetch-tanstack-query'
+      path: '/courses/fetch-tanstack-query'
+      fullPath: '/courses/fetch-tanstack-query'
+      preLoaderRoute: typeof CoursesFetchTanstackQueryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/courses/fetch-loader-data': {
+      id: '/courses/fetch-loader-data'
+      path: '/courses/fetch-loader-data'
+      fullPath: '/courses/fetch-loader-data'
+      preLoaderRoute: typeof CoursesFetchLoaderDataRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/courses/about': {
+      id: '/courses/about'
+      path: '/courses/about'
+      fullPath: '/courses/about'
+      preLoaderRoute: typeof CoursesAboutRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/$': {
@@ -337,6 +433,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DemoApiNamesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/courses/fetch-loader-data-params/$userId': {
+      id: '/courses/fetch-loader-data-params/$userId'
+      path: '/courses/fetch-loader-data-params/$userId'
+      fullPath: '/courses/fetch-loader-data-params/$userId'
+      preLoaderRoute: typeof CoursesFetchLoaderDataParamsUserIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/rpc/$': {
       id: '/api/rpc/$'
       path: '/api/rpc/$'
@@ -378,10 +481,17 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ApiSplatRoute: ApiSplatRoute,
+  CoursesAboutRoute: CoursesAboutRoute,
+  CoursesFetchLoaderDataRoute: CoursesFetchLoaderDataRoute,
+  CoursesFetchTanstackQueryRoute: CoursesFetchTanstackQueryRoute,
+  CoursesFetchTanstackQueryMutationZodRoute:
+    CoursesFetchTanstackQueryMutationZodRoute,
   DemoOrpcTodoRoute: DemoOrpcTodoRoute,
   DemoPrismaRoute: DemoPrismaRoute,
   DemoTanstackQueryRoute: DemoTanstackQueryRoute,
   ApiRpcSplatRoute: ApiRpcSplatRoute,
+  CoursesFetchLoaderDataParamsUserIdRoute:
+    CoursesFetchLoaderDataParamsUserIdRoute,
   DemoApiNamesRoute: DemoApiNamesRoute,
   DemoApiTqTodosRoute: DemoApiTqTodosRoute,
   DemoFormAddressRoute: DemoFormAddressRoute,
