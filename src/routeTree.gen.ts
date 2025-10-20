@@ -18,6 +18,7 @@ import { Route as CoursesFetchTanstackQueryMutationZodRouteImport } from './rout
 import { Route as CoursesFetchTanstackQueryRouteImport } from './routes/courses/fetch-tanstack-query'
 import { Route as CoursesFetchLoaderDataRouteImport } from './routes/courses/fetch-loader-data'
 import { Route as CoursesAboutRouteImport } from './routes/courses/about'
+import { Route as ApiUsersRouteImport } from './routes/api/users'
 import { Route as ApiSplatRouteImport } from './routes/api.$'
 import { Route as CoursesDashboardRouteRouteImport } from './routes/courses/dashboard/route'
 import { Route as CoursesDashboardIndexRouteImport } from './routes/courses/dashboard/index'
@@ -83,6 +84,11 @@ const CoursesFetchLoaderDataRoute = CoursesFetchLoaderDataRouteImport.update({
 const CoursesAboutRoute = CoursesAboutRouteImport.update({
   id: '/courses/about',
   path: '/courses/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiUsersRoute = ApiUsersRouteImport.update({
+  id: '/api/users',
+  path: '/api/users',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiSplatRoute = ApiSplatRouteImport.update({
@@ -187,6 +193,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/courses/dashboard': typeof CoursesDashboardLayoutRouteWithChildren
   '/api/$': typeof ApiSplatRoute
+  '/api/users': typeof ApiUsersRoute
   '/courses/about': typeof CoursesAboutRoute
   '/courses/fetch-loader-data': typeof CoursesFetchLoaderDataRoute
   '/courses/fetch-tanstack-query': typeof CoursesFetchTanstackQueryRoute
@@ -215,6 +222,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/api/$': typeof ApiSplatRoute
+  '/api/users': typeof ApiUsersRoute
   '/courses/about': typeof CoursesAboutRoute
   '/courses/fetch-loader-data': typeof CoursesFetchLoaderDataRoute
   '/courses/fetch-tanstack-query': typeof CoursesFetchTanstackQueryRoute
@@ -245,6 +253,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/courses/dashboard': typeof CoursesDashboardRouteRouteWithChildren
   '/api/$': typeof ApiSplatRoute
+  '/api/users': typeof ApiUsersRoute
   '/courses/about': typeof CoursesAboutRoute
   '/courses/fetch-loader-data': typeof CoursesFetchLoaderDataRoute
   '/courses/fetch-tanstack-query': typeof CoursesFetchTanstackQueryRoute
@@ -277,6 +286,7 @@ export interface FileRouteTypes {
     | '/'
     | '/courses/dashboard'
     | '/api/$'
+    | '/api/users'
     | '/courses/about'
     | '/courses/fetch-loader-data'
     | '/courses/fetch-tanstack-query'
@@ -305,6 +315,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/api/$'
+    | '/api/users'
     | '/courses/about'
     | '/courses/fetch-loader-data'
     | '/courses/fetch-tanstack-query'
@@ -334,6 +345,7 @@ export interface FileRouteTypes {
     | '/'
     | '/courses/dashboard'
     | '/api/$'
+    | '/api/users'
     | '/courses/about'
     | '/courses/fetch-loader-data'
     | '/courses/fetch-tanstack-query'
@@ -365,6 +377,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CoursesDashboardRouteRoute: typeof CoursesDashboardRouteRouteWithChildren
   ApiSplatRoute: typeof ApiSplatRoute
+  ApiUsersRoute: typeof ApiUsersRoute
   CoursesAboutRoute: typeof CoursesAboutRoute
   CoursesFetchLoaderDataRoute: typeof CoursesFetchLoaderDataRoute
   CoursesFetchTanstackQueryRoute: typeof CoursesFetchTanstackQueryRoute
@@ -451,6 +464,13 @@ declare module '@tanstack/react-router' {
       path: '/courses/about'
       fullPath: '/courses/about'
       preLoaderRoute: typeof CoursesAboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/users': {
+      id: '/api/users'
+      path: '/api/users'
+      fullPath: '/api/users'
+      preLoaderRoute: typeof ApiUsersRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/$': {
@@ -624,6 +644,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CoursesDashboardRouteRoute: CoursesDashboardRouteRouteWithChildren,
   ApiSplatRoute: ApiSplatRoute,
+  ApiUsersRoute: ApiUsersRoute,
   CoursesAboutRoute: CoursesAboutRoute,
   CoursesFetchLoaderDataRoute: CoursesFetchLoaderDataRoute,
   CoursesFetchTanstackQueryRoute: CoursesFetchTanstackQueryRoute,
