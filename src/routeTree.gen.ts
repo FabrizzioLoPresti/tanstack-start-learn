@@ -19,6 +19,8 @@ import { Route as CoursesFetchTanstackQueryRouteImport } from './routes/courses/
 import { Route as CoursesFetchLoaderDataRouteImport } from './routes/courses/fetch-loader-data'
 import { Route as CoursesAboutRouteImport } from './routes/courses/about'
 import { Route as ApiSplatRouteImport } from './routes/api.$'
+import { Route as CoursesDashboardRouteRouteImport } from './routes/courses/dashboard/route'
+import { Route as CoursesDashboardIndexRouteImport } from './routes/courses/dashboard/index'
 import { Route as DemoStartServerFuncsRouteImport } from './routes/demo/start.server-funcs'
 import { Route as DemoStartApiRequestRouteImport } from './routes/demo/start.api-request'
 import { Route as DemoSentryTestingRouteImport } from './routes/demo/sentry.testing'
@@ -27,6 +29,7 @@ import { Route as DemoFormAddressRouteImport } from './routes/demo/form.address'
 import { Route as DemoApiTqTodosRouteImport } from './routes/demo/api.tq-todos'
 import { Route as DemoApiNamesRouteImport } from './routes/demo/api.names'
 import { Route as CoursesFetchLoaderDataParamsUserIdRouteImport } from './routes/courses/fetch-loader-data-params.$userId'
+import { Route as CoursesDashboardSettingsRouteImport } from './routes/courses/dashboard/settings'
 import { Route as ApiRpcSplatRouteImport } from './routes/api.rpc.$'
 import { Route as DemoStartSsrIndexRouteImport } from './routes/demo/start.ssr.index'
 import { Route as DemoStartSsrSpaModeRouteImport } from './routes/demo/start.ssr.spa-mode'
@@ -85,6 +88,16 @@ const ApiSplatRoute = ApiSplatRouteImport.update({
   path: '/api/$',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CoursesDashboardRouteRoute = CoursesDashboardRouteRouteImport.update({
+  id: '/courses/dashboard',
+  path: '/courses/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CoursesDashboardIndexRoute = CoursesDashboardIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => CoursesDashboardRouteRoute,
+} as any)
 const DemoStartServerFuncsRoute = DemoStartServerFuncsRouteImport.update({
   id: '/demo/start/server-funcs',
   path: '/demo/start/server-funcs',
@@ -126,6 +139,12 @@ const CoursesFetchLoaderDataParamsUserIdRoute =
     path: '/courses/fetch-loader-data-params/$userId',
     getParentRoute: () => rootRouteImport,
   } as any)
+const CoursesDashboardSettingsRoute =
+  CoursesDashboardSettingsRouteImport.update({
+    id: '/settings',
+    path: '/settings',
+    getParentRoute: () => CoursesDashboardRouteRoute,
+  } as any)
 const ApiRpcSplatRoute = ApiRpcSplatRouteImport.update({
   id: '/api/rpc/$',
   path: '/api/rpc/$',
@@ -154,6 +173,7 @@ const DemoStartSsrDataOnlyRoute = DemoStartSsrDataOnlyRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/courses/dashboard': typeof CoursesDashboardRouteRouteWithChildren
   '/api/$': typeof ApiSplatRoute
   '/courses/about': typeof CoursesAboutRoute
   '/courses/fetch-loader-data': typeof CoursesFetchLoaderDataRoute
@@ -164,6 +184,7 @@ export interface FileRoutesByFullPath {
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
   '/courses': typeof CoursesIndexRoute
   '/api/rpc/$': typeof ApiRpcSplatRoute
+  '/courses/dashboard/settings': typeof CoursesDashboardSettingsRoute
   '/courses/fetch-loader-data-params/$userId': typeof CoursesFetchLoaderDataParamsUserIdRoute
   '/demo/api/names': typeof DemoApiNamesRoute
   '/demo/api/tq-todos': typeof DemoApiTqTodosRoute
@@ -172,6 +193,7 @@ export interface FileRoutesByFullPath {
   '/demo/sentry/testing': typeof DemoSentryTestingRoute
   '/demo/start/api-request': typeof DemoStartApiRequestRoute
   '/demo/start/server-funcs': typeof DemoStartServerFuncsRoute
+  '/courses/dashboard/': typeof CoursesDashboardIndexRoute
   '/demo/start/ssr/data-only': typeof DemoStartSsrDataOnlyRoute
   '/demo/start/ssr/full-ssr': typeof DemoStartSsrFullSsrRoute
   '/demo/start/ssr/spa-mode': typeof DemoStartSsrSpaModeRoute
@@ -189,6 +211,7 @@ export interface FileRoutesByTo {
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
   '/courses': typeof CoursesIndexRoute
   '/api/rpc/$': typeof ApiRpcSplatRoute
+  '/courses/dashboard/settings': typeof CoursesDashboardSettingsRoute
   '/courses/fetch-loader-data-params/$userId': typeof CoursesFetchLoaderDataParamsUserIdRoute
   '/demo/api/names': typeof DemoApiNamesRoute
   '/demo/api/tq-todos': typeof DemoApiTqTodosRoute
@@ -197,6 +220,7 @@ export interface FileRoutesByTo {
   '/demo/sentry/testing': typeof DemoSentryTestingRoute
   '/demo/start/api-request': typeof DemoStartApiRequestRoute
   '/demo/start/server-funcs': typeof DemoStartServerFuncsRoute
+  '/courses/dashboard': typeof CoursesDashboardIndexRoute
   '/demo/start/ssr/data-only': typeof DemoStartSsrDataOnlyRoute
   '/demo/start/ssr/full-ssr': typeof DemoStartSsrFullSsrRoute
   '/demo/start/ssr/spa-mode': typeof DemoStartSsrSpaModeRoute
@@ -205,6 +229,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/courses/dashboard': typeof CoursesDashboardRouteRouteWithChildren
   '/api/$': typeof ApiSplatRoute
   '/courses/about': typeof CoursesAboutRoute
   '/courses/fetch-loader-data': typeof CoursesFetchLoaderDataRoute
@@ -215,6 +240,7 @@ export interface FileRoutesById {
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
   '/courses/': typeof CoursesIndexRoute
   '/api/rpc/$': typeof ApiRpcSplatRoute
+  '/courses/dashboard/settings': typeof CoursesDashboardSettingsRoute
   '/courses/fetch-loader-data-params/$userId': typeof CoursesFetchLoaderDataParamsUserIdRoute
   '/demo/api/names': typeof DemoApiNamesRoute
   '/demo/api/tq-todos': typeof DemoApiTqTodosRoute
@@ -223,6 +249,7 @@ export interface FileRoutesById {
   '/demo/sentry/testing': typeof DemoSentryTestingRoute
   '/demo/start/api-request': typeof DemoStartApiRequestRoute
   '/demo/start/server-funcs': typeof DemoStartServerFuncsRoute
+  '/courses/dashboard/': typeof CoursesDashboardIndexRoute
   '/demo/start/ssr/data-only': typeof DemoStartSsrDataOnlyRoute
   '/demo/start/ssr/full-ssr': typeof DemoStartSsrFullSsrRoute
   '/demo/start/ssr/spa-mode': typeof DemoStartSsrSpaModeRoute
@@ -232,6 +259,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/courses/dashboard'
     | '/api/$'
     | '/courses/about'
     | '/courses/fetch-loader-data'
@@ -242,6 +270,7 @@ export interface FileRouteTypes {
     | '/demo/tanstack-query'
     | '/courses'
     | '/api/rpc/$'
+    | '/courses/dashboard/settings'
     | '/courses/fetch-loader-data-params/$userId'
     | '/demo/api/names'
     | '/demo/api/tq-todos'
@@ -250,6 +279,7 @@ export interface FileRouteTypes {
     | '/demo/sentry/testing'
     | '/demo/start/api-request'
     | '/demo/start/server-funcs'
+    | '/courses/dashboard/'
     | '/demo/start/ssr/data-only'
     | '/demo/start/ssr/full-ssr'
     | '/demo/start/ssr/spa-mode'
@@ -267,6 +297,7 @@ export interface FileRouteTypes {
     | '/demo/tanstack-query'
     | '/courses'
     | '/api/rpc/$'
+    | '/courses/dashboard/settings'
     | '/courses/fetch-loader-data-params/$userId'
     | '/demo/api/names'
     | '/demo/api/tq-todos'
@@ -275,6 +306,7 @@ export interface FileRouteTypes {
     | '/demo/sentry/testing'
     | '/demo/start/api-request'
     | '/demo/start/server-funcs'
+    | '/courses/dashboard'
     | '/demo/start/ssr/data-only'
     | '/demo/start/ssr/full-ssr'
     | '/demo/start/ssr/spa-mode'
@@ -282,6 +314,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/courses/dashboard'
     | '/api/$'
     | '/courses/about'
     | '/courses/fetch-loader-data'
@@ -292,6 +325,7 @@ export interface FileRouteTypes {
     | '/demo/tanstack-query'
     | '/courses/'
     | '/api/rpc/$'
+    | '/courses/dashboard/settings'
     | '/courses/fetch-loader-data-params/$userId'
     | '/demo/api/names'
     | '/demo/api/tq-todos'
@@ -300,6 +334,7 @@ export interface FileRouteTypes {
     | '/demo/sentry/testing'
     | '/demo/start/api-request'
     | '/demo/start/server-funcs'
+    | '/courses/dashboard/'
     | '/demo/start/ssr/data-only'
     | '/demo/start/ssr/full-ssr'
     | '/demo/start/ssr/spa-mode'
@@ -308,6 +343,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CoursesDashboardRouteRoute: typeof CoursesDashboardRouteRouteWithChildren
   ApiSplatRoute: typeof ApiSplatRoute
   CoursesAboutRoute: typeof CoursesAboutRoute
   CoursesFetchLoaderDataRoute: typeof CoursesFetchLoaderDataRoute
@@ -404,6 +440,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiSplatRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/courses/dashboard': {
+      id: '/courses/dashboard'
+      path: '/courses/dashboard'
+      fullPath: '/courses/dashboard'
+      preLoaderRoute: typeof CoursesDashboardRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/courses/dashboard/': {
+      id: '/courses/dashboard/'
+      path: '/'
+      fullPath: '/courses/dashboard/'
+      preLoaderRoute: typeof CoursesDashboardIndexRouteImport
+      parentRoute: typeof CoursesDashboardRouteRoute
+    }
     '/demo/start/server-funcs': {
       id: '/demo/start/server-funcs'
       path: '/demo/start/server-funcs'
@@ -460,6 +510,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CoursesFetchLoaderDataParamsUserIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/courses/dashboard/settings': {
+      id: '/courses/dashboard/settings'
+      path: '/settings'
+      fullPath: '/courses/dashboard/settings'
+      preLoaderRoute: typeof CoursesDashboardSettingsRouteImport
+      parentRoute: typeof CoursesDashboardRouteRoute
+    }
     '/api/rpc/$': {
       id: '/api/rpc/$'
       path: '/api/rpc/$'
@@ -498,8 +555,24 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface CoursesDashboardRouteRouteChildren {
+  CoursesDashboardSettingsRoute: typeof CoursesDashboardSettingsRoute
+  CoursesDashboardIndexRoute: typeof CoursesDashboardIndexRoute
+}
+
+const CoursesDashboardRouteRouteChildren: CoursesDashboardRouteRouteChildren = {
+  CoursesDashboardSettingsRoute: CoursesDashboardSettingsRoute,
+  CoursesDashboardIndexRoute: CoursesDashboardIndexRoute,
+}
+
+const CoursesDashboardRouteRouteWithChildren =
+  CoursesDashboardRouteRoute._addFileChildren(
+    CoursesDashboardRouteRouteChildren,
+  )
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CoursesDashboardRouteRoute: CoursesDashboardRouteRouteWithChildren,
   ApiSplatRoute: ApiSplatRoute,
   CoursesAboutRoute: CoursesAboutRoute,
   CoursesFetchLoaderDataRoute: CoursesFetchLoaderDataRoute,
