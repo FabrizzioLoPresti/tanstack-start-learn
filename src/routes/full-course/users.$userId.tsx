@@ -1,4 +1,23 @@
 import { createFileRoute, notFound } from '@tanstack/react-router'
+import { createServerFn } from '@tanstack/react-start'
+
+const fetchUserData = createServerFn()
+  .inputValidator((data: { userId: string }) => data)
+  .handler(async ({ data: { userId } }) => {
+    const resp = await fetch(
+      `https://jsonplaceholder.typicode.com/users/${userId}`,
+    )
+    if (!resp.ok) {
+      throw new Error('Failed to fetch user data')
+    }
+
+    const user = await resp.json()
+    if (!user.id) {
+      throw notFound()
+    }
+
+    return { userId, name: user.name }
+  })
 
 export const Route = createFileRoute('/full-course/users/$userId')({
   component: RouteComponent,
@@ -13,21 +32,26 @@ export const Route = createFileRoute('/full-course/users/$userId')({
     // Se llama cuando ingresamos a una URL que matchea con la ruta
     // Generalmente se usa para cargar datos necesarios para renderizar la ruta, fetch de una API, etc.
     const { userId } = params
+
     if (userId === '0') {
       // throw new Response('User Not Found', { status: 404 })
       throw notFound()
     }
-    return { userId }
+
+    const user = fetchUserData({ data: { userId } })
+    return user
   },
 })
 
 function RouteComponent() {
   const { userId } = Route.useParams()
+  const user = Route.useLoaderData()
 
   return (
     <div>
       <h1>Hello "/full-course/users/{userId}"!</h1>
       <p>User ID: {userId}</p>
+      <p>User Name: {user.name}</p>
     </div>
   )
 }
