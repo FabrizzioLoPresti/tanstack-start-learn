@@ -1,6 +1,8 @@
 import { createFileRoute, notFound } from '@tanstack/react-router'
 import { createServerFn } from '@tanstack/react-start'
 
+// Server Function to fetch user data
+// createServerFn crea una funcion que se ejecuta UNICAMENTE en el servidor, ya que loader se ejecuta en el servidor y cliente
 const fetchUserData = createServerFn()
   .inputValidator((data: { userId: string }) => data)
   .handler(async ({ data: { userId } }) => {
