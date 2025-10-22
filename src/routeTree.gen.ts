@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as FullCourseIndexRouteImport } from './routes/full-course/index'
 import { Route as CoursesIndexRouteImport } from './routes/courses/index'
 import { Route as FullCourseUserRouteImport } from './routes/full-course/user'
+import { Route as FullCourseTanstackQueryRouteImport } from './routes/full-course/tanstack-query'
 import { Route as FullCourseAboutRouteImport } from './routes/full-course/about'
 import { Route as DemoTanstackQueryRouteImport } from './routes/demo/tanstack-query'
 import { Route as DemoPrismaRouteImport } from './routes/demo/prisma'
@@ -61,6 +62,11 @@ const CoursesIndexRoute = CoursesIndexRouteImport.update({
 const FullCourseUserRoute = FullCourseUserRouteImport.update({
   id: '/full-course/user',
   path: '/full-course/user',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FullCourseTanstackQueryRoute = FullCourseTanstackQueryRouteImport.update({
+  id: '/full-course/tanstack-query',
+  path: '/full-course/tanstack-query',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FullCourseAboutRoute = FullCourseAboutRouteImport.update({
@@ -226,6 +232,7 @@ export interface FileRoutesByFullPath {
   '/demo/prisma': typeof DemoPrismaRoute
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
   '/full-course/about': typeof FullCourseAboutRoute
+  '/full-course/tanstack-query': typeof FullCourseTanstackQueryRoute
   '/full-course/user': typeof FullCourseUserRoute
   '/courses': typeof CoursesIndexRoute
   '/full-course': typeof FullCourseIndexRoute
@@ -259,6 +266,7 @@ export interface FileRoutesByTo {
   '/demo/prisma': typeof DemoPrismaRoute
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
   '/full-course/about': typeof FullCourseAboutRoute
+  '/full-course/tanstack-query': typeof FullCourseTanstackQueryRoute
   '/full-course/user': typeof FullCourseUserRoute
   '/courses': typeof CoursesIndexRoute
   '/full-course': typeof FullCourseIndexRoute
@@ -294,6 +302,7 @@ export interface FileRoutesById {
   '/demo/prisma': typeof DemoPrismaRoute
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
   '/full-course/about': typeof FullCourseAboutRoute
+  '/full-course/tanstack-query': typeof FullCourseTanstackQueryRoute
   '/full-course/user': typeof FullCourseUserRoute
   '/courses/': typeof CoursesIndexRoute
   '/full-course/': typeof FullCourseIndexRoute
@@ -331,6 +340,7 @@ export interface FileRouteTypes {
     | '/demo/prisma'
     | '/demo/tanstack-query'
     | '/full-course/about'
+    | '/full-course/tanstack-query'
     | '/full-course/user'
     | '/courses'
     | '/full-course'
@@ -364,6 +374,7 @@ export interface FileRouteTypes {
     | '/demo/prisma'
     | '/demo/tanstack-query'
     | '/full-course/about'
+    | '/full-course/tanstack-query'
     | '/full-course/user'
     | '/courses'
     | '/full-course'
@@ -398,6 +409,7 @@ export interface FileRouteTypes {
     | '/demo/prisma'
     | '/demo/tanstack-query'
     | '/full-course/about'
+    | '/full-course/tanstack-query'
     | '/full-course/user'
     | '/courses/'
     | '/full-course/'
@@ -434,6 +446,7 @@ export interface RootRouteChildren {
   DemoPrismaRoute: typeof DemoPrismaRoute
   DemoTanstackQueryRoute: typeof DemoTanstackQueryRoute
   FullCourseAboutRoute: typeof FullCourseAboutRoute
+  FullCourseTanstackQueryRoute: typeof FullCourseTanstackQueryRoute
   FullCourseUserRoute: typeof FullCourseUserRoute
   CoursesIndexRoute: typeof CoursesIndexRoute
   FullCourseIndexRoute: typeof FullCourseIndexRoute
@@ -481,6 +494,13 @@ declare module '@tanstack/react-router' {
       path: '/full-course/user'
       fullPath: '/full-course/user'
       preLoaderRoute: typeof FullCourseUserRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/full-course/tanstack-query': {
+      id: '/full-course/tanstack-query'
+      path: '/full-course/tanstack-query'
+      fullPath: '/full-course/tanstack-query'
+      preLoaderRoute: typeof FullCourseTanstackQueryRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/full-course/about': {
@@ -734,6 +754,7 @@ const rootRouteChildren: RootRouteChildren = {
   DemoPrismaRoute: DemoPrismaRoute,
   DemoTanstackQueryRoute: DemoTanstackQueryRoute,
   FullCourseAboutRoute: FullCourseAboutRoute,
+  FullCourseTanstackQueryRoute: FullCourseTanstackQueryRoute,
   FullCourseUserRoute: FullCourseUserRoute,
   CoursesIndexRoute: CoursesIndexRoute,
   FullCourseIndexRoute: FullCourseIndexRoute,

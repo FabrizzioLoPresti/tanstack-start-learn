@@ -30,6 +30,14 @@ function RouteComponent() {
               Go to User Page with ID 123
             </Link>
           </li>
+          <li>
+            <Link
+              to="/full-course/tanstack-query"
+              className="text-blue-500 underline"
+            >
+              Go to TanStack Query Page
+            </Link>
+          </li>
         </ul>
       </nav>
     </div>
