@@ -8,6 +8,7 @@ const fetchUserData = createServerFn()
       `https://jsonplaceholder.typicode.com/users/${userId}`,
     )
     if (!resp.ok) {
+      // Error handling catcheado luego en el loader por errorComponent para mostrar mensaje en UI
       throw new Error('Failed to fetch user data')
     }
 
@@ -22,6 +23,13 @@ const fetchUserData = createServerFn()
 export const Route = createFileRoute('/full-course/users/$userId')({
   component: RouteComponent,
   notFoundComponent: () => <div>User Not Found!</div>,
+  errorComponent: ({ error }) => (
+    <div>
+      <h1>Error!</h1>
+      <pre>{error.message}</pre>
+    </div>
+  ),
+  pendingComponent: () => <div>Loading user data...</div>,
   beforeLoad: ({ params }) => {
     // beforeLoad es una funcion que se llama antes de que se cargue la ruta y antes de que se llame al loader
     // Generalmente se usa para autenticar, autorizar, o redirigir si no se cumplen ciertas condiciones
