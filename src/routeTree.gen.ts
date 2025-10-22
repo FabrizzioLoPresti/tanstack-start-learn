@@ -10,8 +10,11 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ReactQueryIndexRouteImport } from './routes/react-query/index'
 import { Route as FullCourseIndexRouteImport } from './routes/full-course/index'
 import { Route as CoursesIndexRouteImport } from './routes/courses/index'
+import { Route as ReactQueryFetchDataByParametersRouteImport } from './routes/react-query/fetch-data-by-parameters'
+import { Route as ReactQueryFetchDataRouteImport } from './routes/react-query/fetch-data'
 import { Route as FullCourseUserRouteImport } from './routes/full-course/user'
 import { Route as FullCourseTanstackQueryRouteImport } from './routes/full-course/tanstack-query'
 import { Route as FullCourseAboutRouteImport } from './routes/full-course/about'
@@ -49,6 +52,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ReactQueryIndexRoute = ReactQueryIndexRouteImport.update({
+  id: '/react-query/',
+  path: '/react-query/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const FullCourseIndexRoute = FullCourseIndexRouteImport.update({
   id: '/full-course/',
   path: '/full-course/',
@@ -57,6 +65,17 @@ const FullCourseIndexRoute = FullCourseIndexRouteImport.update({
 const CoursesIndexRoute = CoursesIndexRouteImport.update({
   id: '/courses/',
   path: '/courses/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReactQueryFetchDataByParametersRoute =
+  ReactQueryFetchDataByParametersRouteImport.update({
+    id: '/react-query/fetch-data-by-parameters',
+    path: '/react-query/fetch-data-by-parameters',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ReactQueryFetchDataRoute = ReactQueryFetchDataRouteImport.update({
+  id: '/react-query/fetch-data',
+  path: '/react-query/fetch-data',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FullCourseUserRoute = FullCourseUserRouteImport.update({
@@ -234,8 +253,11 @@ export interface FileRoutesByFullPath {
   '/full-course/about': typeof FullCourseAboutRoute
   '/full-course/tanstack-query': typeof FullCourseTanstackQueryRoute
   '/full-course/user': typeof FullCourseUserRoute
+  '/react-query/fetch-data': typeof ReactQueryFetchDataRoute
+  '/react-query/fetch-data-by-parameters': typeof ReactQueryFetchDataByParametersRoute
   '/courses': typeof CoursesIndexRoute
   '/full-course': typeof FullCourseIndexRoute
+  '/react-query': typeof ReactQueryIndexRoute
   '/api/rpc/$': typeof ApiRpcSplatRoute
   '/courses/dashboard/settings': typeof CoursesDashboardSettingsRoute
   '/courses/fetch-loader-data-params/$userId': typeof CoursesFetchLoaderDataParamsUserIdRoute
@@ -268,8 +290,11 @@ export interface FileRoutesByTo {
   '/full-course/about': typeof FullCourseAboutRoute
   '/full-course/tanstack-query': typeof FullCourseTanstackQueryRoute
   '/full-course/user': typeof FullCourseUserRoute
+  '/react-query/fetch-data': typeof ReactQueryFetchDataRoute
+  '/react-query/fetch-data-by-parameters': typeof ReactQueryFetchDataByParametersRoute
   '/courses': typeof CoursesIndexRoute
   '/full-course': typeof FullCourseIndexRoute
+  '/react-query': typeof ReactQueryIndexRoute
   '/api/rpc/$': typeof ApiRpcSplatRoute
   '/courses/dashboard': typeof CoursesDashboardIndexRoute
   '/courses/dashboard/settings': typeof CoursesDashboardSettingsRoute
@@ -304,8 +329,11 @@ export interface FileRoutesById {
   '/full-course/about': typeof FullCourseAboutRoute
   '/full-course/tanstack-query': typeof FullCourseTanstackQueryRoute
   '/full-course/user': typeof FullCourseUserRoute
+  '/react-query/fetch-data': typeof ReactQueryFetchDataRoute
+  '/react-query/fetch-data-by-parameters': typeof ReactQueryFetchDataByParametersRoute
   '/courses/': typeof CoursesIndexRoute
   '/full-course/': typeof FullCourseIndexRoute
+  '/react-query/': typeof ReactQueryIndexRoute
   '/api/rpc/$': typeof ApiRpcSplatRoute
   '/courses/dashboard/_layout': typeof CoursesDashboardLayoutRouteWithChildren
   '/courses/dashboard/settings': typeof CoursesDashboardSettingsRoute
@@ -342,8 +370,11 @@ export interface FileRouteTypes {
     | '/full-course/about'
     | '/full-course/tanstack-query'
     | '/full-course/user'
+    | '/react-query/fetch-data'
+    | '/react-query/fetch-data-by-parameters'
     | '/courses'
     | '/full-course'
+    | '/react-query'
     | '/api/rpc/$'
     | '/courses/dashboard/settings'
     | '/courses/fetch-loader-data-params/$userId'
@@ -376,8 +407,11 @@ export interface FileRouteTypes {
     | '/full-course/about'
     | '/full-course/tanstack-query'
     | '/full-course/user'
+    | '/react-query/fetch-data'
+    | '/react-query/fetch-data-by-parameters'
     | '/courses'
     | '/full-course'
+    | '/react-query'
     | '/api/rpc/$'
     | '/courses/dashboard'
     | '/courses/dashboard/settings'
@@ -411,8 +445,11 @@ export interface FileRouteTypes {
     | '/full-course/about'
     | '/full-course/tanstack-query'
     | '/full-course/user'
+    | '/react-query/fetch-data'
+    | '/react-query/fetch-data-by-parameters'
     | '/courses/'
     | '/full-course/'
+    | '/react-query/'
     | '/api/rpc/$'
     | '/courses/dashboard/_layout'
     | '/courses/dashboard/settings'
@@ -448,8 +485,11 @@ export interface RootRouteChildren {
   FullCourseAboutRoute: typeof FullCourseAboutRoute
   FullCourseTanstackQueryRoute: typeof FullCourseTanstackQueryRoute
   FullCourseUserRoute: typeof FullCourseUserRoute
+  ReactQueryFetchDataRoute: typeof ReactQueryFetchDataRoute
+  ReactQueryFetchDataByParametersRoute: typeof ReactQueryFetchDataByParametersRoute
   CoursesIndexRoute: typeof CoursesIndexRoute
   FullCourseIndexRoute: typeof FullCourseIndexRoute
+  ReactQueryIndexRoute: typeof ReactQueryIndexRoute
   ApiRpcSplatRoute: typeof ApiRpcSplatRoute
   CoursesFetchLoaderDataParamsUserIdRoute: typeof CoursesFetchLoaderDataParamsUserIdRoute
   DemoApiNamesRoute: typeof DemoApiNamesRoute
@@ -475,6 +515,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/react-query/': {
+      id: '/react-query/'
+      path: '/react-query'
+      fullPath: '/react-query'
+      preLoaderRoute: typeof ReactQueryIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/full-course/': {
       id: '/full-course/'
       path: '/full-course'
@@ -487,6 +534,20 @@ declare module '@tanstack/react-router' {
       path: '/courses'
       fullPath: '/courses'
       preLoaderRoute: typeof CoursesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/react-query/fetch-data-by-parameters': {
+      id: '/react-query/fetch-data-by-parameters'
+      path: '/react-query/fetch-data-by-parameters'
+      fullPath: '/react-query/fetch-data-by-parameters'
+      preLoaderRoute: typeof ReactQueryFetchDataByParametersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/react-query/fetch-data': {
+      id: '/react-query/fetch-data'
+      path: '/react-query/fetch-data'
+      fullPath: '/react-query/fetch-data'
+      preLoaderRoute: typeof ReactQueryFetchDataRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/full-course/user': {
@@ -756,8 +817,11 @@ const rootRouteChildren: RootRouteChildren = {
   FullCourseAboutRoute: FullCourseAboutRoute,
   FullCourseTanstackQueryRoute: FullCourseTanstackQueryRoute,
   FullCourseUserRoute: FullCourseUserRoute,
+  ReactQueryFetchDataRoute: ReactQueryFetchDataRoute,
+  ReactQueryFetchDataByParametersRoute: ReactQueryFetchDataByParametersRoute,
   CoursesIndexRoute: CoursesIndexRoute,
   FullCourseIndexRoute: FullCourseIndexRoute,
+  ReactQueryIndexRoute: ReactQueryIndexRoute,
   ApiRpcSplatRoute: ApiRpcSplatRoute,
   CoursesFetchLoaderDataParamsUserIdRoute:
     CoursesFetchLoaderDataParamsUserIdRoute,
