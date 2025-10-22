@@ -21,6 +21,11 @@ function RouteComponent() {
               Go to /react-query/fetch-data-by-parameters
             </Link>
           </li>
+          <li>
+            <Link to="/react-query/mutation-data">
+              Go to /react-query/mutation-data
+            </Link>
+          </li>
         </ul>
       </nav>
     </div>

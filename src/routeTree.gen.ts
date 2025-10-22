@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as ReactQueryIndexRouteImport } from './routes/react-query/index'
 import { Route as FullCourseIndexRouteImport } from './routes/full-course/index'
 import { Route as CoursesIndexRouteImport } from './routes/courses/index'
+import { Route as ReactQueryMutationDataRouteImport } from './routes/react-query/mutation-data'
 import { Route as ReactQueryFetchDataByParametersRouteImport } from './routes/react-query/fetch-data-by-parameters'
 import { Route as ReactQueryFetchDataRouteImport } from './routes/react-query/fetch-data'
 import { Route as FullCourseUserRouteImport } from './routes/full-course/user'
@@ -65,6 +66,11 @@ const FullCourseIndexRoute = FullCourseIndexRouteImport.update({
 const CoursesIndexRoute = CoursesIndexRouteImport.update({
   id: '/courses/',
   path: '/courses/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReactQueryMutationDataRoute = ReactQueryMutationDataRouteImport.update({
+  id: '/react-query/mutation-data',
+  path: '/react-query/mutation-data',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ReactQueryFetchDataByParametersRoute =
@@ -255,6 +261,7 @@ export interface FileRoutesByFullPath {
   '/full-course/user': typeof FullCourseUserRoute
   '/react-query/fetch-data': typeof ReactQueryFetchDataRoute
   '/react-query/fetch-data-by-parameters': typeof ReactQueryFetchDataByParametersRoute
+  '/react-query/mutation-data': typeof ReactQueryMutationDataRoute
   '/courses': typeof CoursesIndexRoute
   '/full-course': typeof FullCourseIndexRoute
   '/react-query': typeof ReactQueryIndexRoute
@@ -292,6 +299,7 @@ export interface FileRoutesByTo {
   '/full-course/user': typeof FullCourseUserRoute
   '/react-query/fetch-data': typeof ReactQueryFetchDataRoute
   '/react-query/fetch-data-by-parameters': typeof ReactQueryFetchDataByParametersRoute
+  '/react-query/mutation-data': typeof ReactQueryMutationDataRoute
   '/courses': typeof CoursesIndexRoute
   '/full-course': typeof FullCourseIndexRoute
   '/react-query': typeof ReactQueryIndexRoute
@@ -331,6 +339,7 @@ export interface FileRoutesById {
   '/full-course/user': typeof FullCourseUserRoute
   '/react-query/fetch-data': typeof ReactQueryFetchDataRoute
   '/react-query/fetch-data-by-parameters': typeof ReactQueryFetchDataByParametersRoute
+  '/react-query/mutation-data': typeof ReactQueryMutationDataRoute
   '/courses/': typeof CoursesIndexRoute
   '/full-course/': typeof FullCourseIndexRoute
   '/react-query/': typeof ReactQueryIndexRoute
@@ -372,6 +381,7 @@ export interface FileRouteTypes {
     | '/full-course/user'
     | '/react-query/fetch-data'
     | '/react-query/fetch-data-by-parameters'
+    | '/react-query/mutation-data'
     | '/courses'
     | '/full-course'
     | '/react-query'
@@ -409,6 +419,7 @@ export interface FileRouteTypes {
     | '/full-course/user'
     | '/react-query/fetch-data'
     | '/react-query/fetch-data-by-parameters'
+    | '/react-query/mutation-data'
     | '/courses'
     | '/full-course'
     | '/react-query'
@@ -447,6 +458,7 @@ export interface FileRouteTypes {
     | '/full-course/user'
     | '/react-query/fetch-data'
     | '/react-query/fetch-data-by-parameters'
+    | '/react-query/mutation-data'
     | '/courses/'
     | '/full-course/'
     | '/react-query/'
@@ -487,6 +499,7 @@ export interface RootRouteChildren {
   FullCourseUserRoute: typeof FullCourseUserRoute
   ReactQueryFetchDataRoute: typeof ReactQueryFetchDataRoute
   ReactQueryFetchDataByParametersRoute: typeof ReactQueryFetchDataByParametersRoute
+  ReactQueryMutationDataRoute: typeof ReactQueryMutationDataRoute
   CoursesIndexRoute: typeof CoursesIndexRoute
   FullCourseIndexRoute: typeof FullCourseIndexRoute
   ReactQueryIndexRoute: typeof ReactQueryIndexRoute
@@ -534,6 +547,13 @@ declare module '@tanstack/react-router' {
       path: '/courses'
       fullPath: '/courses'
       preLoaderRoute: typeof CoursesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/react-query/mutation-data': {
+      id: '/react-query/mutation-data'
+      path: '/react-query/mutation-data'
+      fullPath: '/react-query/mutation-data'
+      preLoaderRoute: typeof ReactQueryMutationDataRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/react-query/fetch-data-by-parameters': {
@@ -819,6 +839,7 @@ const rootRouteChildren: RootRouteChildren = {
   FullCourseUserRoute: FullCourseUserRoute,
   ReactQueryFetchDataRoute: ReactQueryFetchDataRoute,
   ReactQueryFetchDataByParametersRoute: ReactQueryFetchDataByParametersRoute,
+  ReactQueryMutationDataRoute: ReactQueryMutationDataRoute,
   CoursesIndexRoute: CoursesIndexRoute,
   FullCourseIndexRoute: FullCourseIndexRoute,
   ReactQueryIndexRoute: ReactQueryIndexRoute,
