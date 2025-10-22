@@ -1,9 +1,18 @@
 import { createFileRoute, notFound } from '@tanstack/react-router'
 import { createServerFn } from '@tanstack/react-start'
+import { authMiddleware } from '@/app/middleware'
+import { z } from 'zod'
+
+const UserSchema = z.object({
+  id: z.number(),
+  name: z.string(),
+  username: z.string(),
+})
 
 // Server Function to fetch user data
 // createServerFn crea una funcion que se ejecuta UNICAMENTE en el servidor, ya que loader se ejecuta en el servidor y cliente
-const fetchUserData = createServerFn()
+const fetchUserData = createServerFn({ method: 'GET' })
+  .middleware([])
   .inputValidator((data: { userId: string }) => data)
   .handler(async ({ data: { userId } }) => {
     const resp = await fetch(
@@ -20,6 +29,16 @@ const fetchUserData = createServerFn()
     }
 
     return { userId, name: user.name }
+  })
+
+const addUser = createServerFn({ method: 'POST' })
+  .middleware([authMiddleware])
+  .inputValidator(UserSchema)
+  .handler(async ({ data }) => {
+    // This runs only on the server side
+    // Here you would typically save the user data to a database
+    await new Promise((resolve) => setTimeout(resolve, 1000)) // Simulate async operation
+    return { success: true, user: data }
   })
 
 export const Route = createFileRoute('/full-course/users/$userId')({
@@ -57,11 +76,24 @@ function RouteComponent() {
   const { userId } = Route.useParams()
   const user = Route.useLoaderData()
 
+  const submitAddUser = async () => {
+    try {
+      const result = await addUser({
+        data: { id: Number(userId), name: user.name, username: user.name },
+      })
+      console.log('Add User Result:', result)
+    } catch (error) {
+      console.log('Error adding user:', error)
+      alert('Error adding user: ' + (error as Error).message)
+    }
+  }
+
   return (
     <div>
       <h1>Hello "/full-course/users/{userId}"!</h1>
       <p>User ID: {userId}</p>
       <p>User Name: {user.name}</p>
+      <button onClick={submitAddUser}>Add User</button>
     </div>
   )
 }
