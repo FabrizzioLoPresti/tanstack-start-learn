@@ -23,6 +23,34 @@ function RouteComponent() {
     },
   })
 
+  // Consulta inicial de un todo por ID usando React Query al iniciar el componente
+  // Se pueden pasar parametros de la pagina por ejemplo para obtener diferentes todos
+  const {
+    data: todoByIdInit,
+    isLoading: isLoadingTodoByIdInit,
+    isError: isErrorTodoByIdInit,
+    error: errorTodoByIdInit,
+  } = useQuery({
+    queryKey: ['orpc-queries-data', { id: 2 }],
+    queryFn: () => orpc.getTodoById.call({ id: 2 }), // Ejemplo de consulta de datos usando oRPC y React Query
+    staleTime: 1000 * 60 * 5, // 5 minutes
+  })
+
+  // Mutacion para obtener un todo por ID al ejecutar una accion (click de boton por ejemplo)
+  // Se pueden pasar parametros dinamicos
+  const {
+    mutate: getTodoById,
+    data: todoById,
+    isPending: isPendingTodoById,
+    isError: isErrorTodoById,
+    error: errorTodoById,
+  } = useMutation({
+    mutationFn: (input: { id: number }) => orpc.getTodoById.call(input), // Ejemplo de mutacion para obtener un todo por ID
+    onSuccess: (data) => {
+      console.log('Todo fetched by ID:', data)
+    },
+  })
+
   return (
     <div>
       <h1 className="text-2xl font-bold">Hello "/orpc-queries"!</h1>
@@ -38,9 +66,32 @@ function RouteComponent() {
       >
         Add Todo
       </button>
+      <button
+        className="mt-4 ml-4 px-4 py-2 bg-yellow-500 text-white rounded"
+        onClick={() => {
+          const todoId = 1 // Ejemplo: ID del todo a obtener
+          getTodoById({ id: todoId })
+        }}
+      >
+        Get Todo by ID
+      </button>
       {isLoading && <p>Loading...</p>}
       {isError && <p>Error: {(error as Error).message}</p>}
       <pre>{JSON.stringify(data, null, 2)}</pre>
+
+      <hr className="my-8" />
+      {isLoadingTodoByIdInit && <p>Loading initial Todo by ID...</p>}
+      {isErrorTodoByIdInit && (
+        <p>Error: {(errorTodoByIdInit as Error).message}</p>
+      )}
+      <h3>Initial Todo by ID (query):</h3>
+      <pre>{JSON.stringify(todoByIdInit, null, 2)}</pre>
+
+      <hr className="my-8" />
+      {isPendingTodoById && <p>Fetching Todo by ID...</p>}
+      {isErrorTodoById && <p>Error: {(errorTodoById as Error).message}</p>}
+      <h3>Todo by ID (mutation):</h3>
+      <pre>{JSON.stringify(todoById, null, 2)}</pre>
     </div>
   )
 }
