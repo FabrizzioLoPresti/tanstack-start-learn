@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as OrpcQueriesRouteImport } from './routes/orpc-queries'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ReactQueryIndexRouteImport } from './routes/react-query/index'
 import { Route as FullCourseIndexRouteImport } from './routes/full-course/index'
@@ -49,6 +50,11 @@ import { Route as DemoStartSsrFullSsrRouteImport } from './routes/demo/start.ssr
 import { Route as DemoStartSsrDataOnlyRouteImport } from './routes/demo/start.ssr.data-only'
 import { Route as CoursesDashboardLayoutTestRouteImport } from './routes/courses/dashboard/_layout.test'
 
+const OrpcQueriesRoute = OrpcQueriesRouteImport.update({
+  id: '/orpc-queries',
+  path: '/orpc-queries',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -253,6 +259,7 @@ const CoursesDashboardLayoutTestRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/orpc-queries': typeof OrpcQueriesRoute
   '/courses/dashboard': typeof CoursesDashboardLayoutRouteWithChildren
   '/api/$': typeof ApiSplatRoute
   '/api/users': typeof ApiUsersRoute
@@ -293,6 +300,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/orpc-queries': typeof OrpcQueriesRoute
   '/api/$': typeof ApiSplatRoute
   '/api/users': typeof ApiUsersRoute
   '/courses/about': typeof CoursesAboutRoute
@@ -333,6 +341,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/orpc-queries': typeof OrpcQueriesRoute
   '/courses/dashboard': typeof CoursesDashboardRouteRouteWithChildren
   '/api/$': typeof ApiSplatRoute
   '/api/users': typeof ApiUsersRoute
@@ -376,6 +385,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/orpc-queries'
     | '/courses/dashboard'
     | '/api/$'
     | '/api/users'
@@ -416,6 +426,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/orpc-queries'
     | '/api/$'
     | '/api/users'
     | '/courses/about'
@@ -455,6 +466,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/orpc-queries'
     | '/courses/dashboard'
     | '/api/$'
     | '/api/users'
@@ -497,6 +509,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  OrpcQueriesRoute: typeof OrpcQueriesRoute
   CoursesDashboardRouteRoute: typeof CoursesDashboardRouteRouteWithChildren
   ApiSplatRoute: typeof ApiSplatRoute
   ApiUsersRoute: typeof ApiUsersRoute
@@ -535,6 +548,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/orpc-queries': {
+      id: '/orpc-queries'
+      path: '/orpc-queries'
+      fullPath: '/orpc-queries'
+      preLoaderRoute: typeof OrpcQueriesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -844,6 +864,7 @@ const CoursesDashboardRouteRouteWithChildren =
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  OrpcQueriesRoute: OrpcQueriesRoute,
   CoursesDashboardRouteRoute: CoursesDashboardRouteRouteWithChildren,
   ApiSplatRoute: ApiSplatRoute,
   ApiUsersRoute: ApiUsersRoute,

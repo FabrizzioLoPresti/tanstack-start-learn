@@ -7,7 +7,7 @@ import { createFileRoute } from '@tanstack/react-router'
 import { onError } from '@orpc/server'
 import { OpenAPIReferencePlugin } from '@orpc/openapi/plugins'
 
-import { TodoSchema } from '@/orpc/schema'
+import { TodoSchema, TodoListSchema } from '@/orpc/schema'
 import router from '@/orpc/router'
 
 const handler = new OpenAPIHandler(router, {
@@ -29,6 +29,7 @@ const handler = new OpenAPIHandler(router, {
         },
         commonSchemas: {
           Todo: { schema: TodoSchema },
+          TodoList: { schema: TodoListSchema }, // Agrego esquema comun para lista de todos y que pueda ser referenciado en la documentacion de /api
           UndefinedError: { error: 'UndefinedError' },
         },
         security: [{ bearerAuth: [] }],
