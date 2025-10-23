@@ -26,6 +26,11 @@ function RouteComponent() {
               Go to /react-query/mutation-data
             </Link>
           </li>
+          <li>
+            <Link to="/react-query/optimistic-updates">
+              Go to /react-query/optimistic-updates
+            </Link>
+          </li>
         </ul>
       </nav>
     </div>

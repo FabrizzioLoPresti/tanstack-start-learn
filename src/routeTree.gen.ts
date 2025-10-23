@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as ReactQueryIndexRouteImport } from './routes/react-query/index'
 import { Route as FullCourseIndexRouteImport } from './routes/full-course/index'
 import { Route as CoursesIndexRouteImport } from './routes/courses/index'
+import { Route as ReactQueryOptimisticUpdatesRouteImport } from './routes/react-query/optimistic-updates'
 import { Route as ReactQueryMutationDataRouteImport } from './routes/react-query/mutation-data'
 import { Route as ReactQueryFetchDataByParametersRouteImport } from './routes/react-query/fetch-data-by-parameters'
 import { Route as ReactQueryFetchDataRouteImport } from './routes/react-query/fetch-data'
@@ -68,6 +69,12 @@ const CoursesIndexRoute = CoursesIndexRouteImport.update({
   path: '/courses/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ReactQueryOptimisticUpdatesRoute =
+  ReactQueryOptimisticUpdatesRouteImport.update({
+    id: '/react-query/optimistic-updates',
+    path: '/react-query/optimistic-updates',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ReactQueryMutationDataRoute = ReactQueryMutationDataRouteImport.update({
   id: '/react-query/mutation-data',
   path: '/react-query/mutation-data',
@@ -262,6 +269,7 @@ export interface FileRoutesByFullPath {
   '/react-query/fetch-data': typeof ReactQueryFetchDataRoute
   '/react-query/fetch-data-by-parameters': typeof ReactQueryFetchDataByParametersRoute
   '/react-query/mutation-data': typeof ReactQueryMutationDataRoute
+  '/react-query/optimistic-updates': typeof ReactQueryOptimisticUpdatesRoute
   '/courses': typeof CoursesIndexRoute
   '/full-course': typeof FullCourseIndexRoute
   '/react-query': typeof ReactQueryIndexRoute
@@ -300,6 +308,7 @@ export interface FileRoutesByTo {
   '/react-query/fetch-data': typeof ReactQueryFetchDataRoute
   '/react-query/fetch-data-by-parameters': typeof ReactQueryFetchDataByParametersRoute
   '/react-query/mutation-data': typeof ReactQueryMutationDataRoute
+  '/react-query/optimistic-updates': typeof ReactQueryOptimisticUpdatesRoute
   '/courses': typeof CoursesIndexRoute
   '/full-course': typeof FullCourseIndexRoute
   '/react-query': typeof ReactQueryIndexRoute
@@ -340,6 +349,7 @@ export interface FileRoutesById {
   '/react-query/fetch-data': typeof ReactQueryFetchDataRoute
   '/react-query/fetch-data-by-parameters': typeof ReactQueryFetchDataByParametersRoute
   '/react-query/mutation-data': typeof ReactQueryMutationDataRoute
+  '/react-query/optimistic-updates': typeof ReactQueryOptimisticUpdatesRoute
   '/courses/': typeof CoursesIndexRoute
   '/full-course/': typeof FullCourseIndexRoute
   '/react-query/': typeof ReactQueryIndexRoute
@@ -382,6 +392,7 @@ export interface FileRouteTypes {
     | '/react-query/fetch-data'
     | '/react-query/fetch-data-by-parameters'
     | '/react-query/mutation-data'
+    | '/react-query/optimistic-updates'
     | '/courses'
     | '/full-course'
     | '/react-query'
@@ -420,6 +431,7 @@ export interface FileRouteTypes {
     | '/react-query/fetch-data'
     | '/react-query/fetch-data-by-parameters'
     | '/react-query/mutation-data'
+    | '/react-query/optimistic-updates'
     | '/courses'
     | '/full-course'
     | '/react-query'
@@ -459,6 +471,7 @@ export interface FileRouteTypes {
     | '/react-query/fetch-data'
     | '/react-query/fetch-data-by-parameters'
     | '/react-query/mutation-data'
+    | '/react-query/optimistic-updates'
     | '/courses/'
     | '/full-course/'
     | '/react-query/'
@@ -500,6 +513,7 @@ export interface RootRouteChildren {
   ReactQueryFetchDataRoute: typeof ReactQueryFetchDataRoute
   ReactQueryFetchDataByParametersRoute: typeof ReactQueryFetchDataByParametersRoute
   ReactQueryMutationDataRoute: typeof ReactQueryMutationDataRoute
+  ReactQueryOptimisticUpdatesRoute: typeof ReactQueryOptimisticUpdatesRoute
   CoursesIndexRoute: typeof CoursesIndexRoute
   FullCourseIndexRoute: typeof FullCourseIndexRoute
   ReactQueryIndexRoute: typeof ReactQueryIndexRoute
@@ -547,6 +561,13 @@ declare module '@tanstack/react-router' {
       path: '/courses'
       fullPath: '/courses'
       preLoaderRoute: typeof CoursesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/react-query/optimistic-updates': {
+      id: '/react-query/optimistic-updates'
+      path: '/react-query/optimistic-updates'
+      fullPath: '/react-query/optimistic-updates'
+      preLoaderRoute: typeof ReactQueryOptimisticUpdatesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/react-query/mutation-data': {
@@ -840,6 +861,7 @@ const rootRouteChildren: RootRouteChildren = {
   ReactQueryFetchDataRoute: ReactQueryFetchDataRoute,
   ReactQueryFetchDataByParametersRoute: ReactQueryFetchDataByParametersRoute,
   ReactQueryMutationDataRoute: ReactQueryMutationDataRoute,
+  ReactQueryOptimisticUpdatesRoute: ReactQueryOptimisticUpdatesRoute,
   CoursesIndexRoute: CoursesIndexRoute,
   FullCourseIndexRoute: FullCourseIndexRoute,
   ReactQueryIndexRoute: ReactQueryIndexRoute,
