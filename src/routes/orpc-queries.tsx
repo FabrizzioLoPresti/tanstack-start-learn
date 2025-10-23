@@ -15,6 +15,14 @@ function RouteComponent() {
     staleTime: 1000 * 60 * 5, // 5 minutes
   })
 
+  const { mutate: addTodo } = useMutation({
+    mutationFn: (newTodo: { name: string }) => orpc.addTodo.call(newTodo), // Ejemplo de mutacion para agregar un nuevo todo
+    onSuccess: () => {
+      // queryClient.invalidateQueries({ queryKey: ['orpc-queries-data''] })orpc-queries-data'
+      refetch() // Refetch data despues de agregar un nuevo todo
+    },
+  })
+
   return (
     <div>
       <h1 className="text-2xl font-bold">Hello "/orpc-queries"!</h1>
@@ -23,6 +31,12 @@ function RouteComponent() {
         onClick={() => refetch()}
       >
         Refetch Data
+      </button>
+      <button
+        className="mt-4 ml-4 px-4 py-2 bg-green-500 text-white rounded"
+        onClick={() => addTodo({ name: 'New oRPC Todo' })}
+      >
+        Add Todo
       </button>
       {isLoading && <p>Loading...</p>}
       {isError && <p>Error: {(error as Error).message}</p>}
