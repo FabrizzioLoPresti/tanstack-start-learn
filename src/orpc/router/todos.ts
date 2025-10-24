@@ -30,18 +30,20 @@ export const getTodoById = os
 export const addTodo = authed
   .input(z.object({ name: z.string() }))
   .output(TodoSchema)
-  .errors({
-    BAD_REQUEST: {
-      message: 'Simulated ORPC error adding todo',
-      status: 400,
-    },
-  })
+  // .errors({
+  //   BAD_REQUEST: {
+  //     message: 'Simulated ORPC error adding todo :)',
+  //     status: 400,
+  //   },
+  // })
   .handler(({ input, context, errors }) => {
     // throw new Error('Simulated error adding todo') // Simulacion de error -> llega OK al addTodoError tomado desde React Query
     // throw new ORPCError('BAD_REQUEST', {
     //   message: 'Simulated ORPC error adding todo',
+    //   status: 400,
     // }) // -> llega OK al addTodoError tomado desde React Query
     // throw errors.BAD_REQUEST() // -> llega OK al addTodoError tomado desde React Query
+    throw errors.BAD_REQUEST() // Simulacion de error de ORPC (base con errores definidos) -> llega OK al addTodoError tomado desde React Query
 
     console.log('User from context:', context.user) // Accediendo al usuario del contexto
 
