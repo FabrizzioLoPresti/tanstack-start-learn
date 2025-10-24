@@ -8,8 +8,8 @@ export const requiredAuthMiddleware = os
 
     if (!session) {
       throw new ORPCError('UNAUTHORIZED', {
-        message: 'User is not authenticated',
-      })
+        message: 'User is not authenticated :)',
+      }) // llega OK al addTodoError tomado desde React Query, saltando el procedure donde se llama el middleware
     }
 
     return await next({
@@ -20,7 +20,7 @@ export const requiredAuthMiddleware = os
     })
   })
 
-const notAuthenticated = false // Simulacion de usuario no autenticado
+const notAuthenticated = true // Simulacion de usuario no autenticado
 
 const getSession = async () => {
   if (notAuthenticated) return null

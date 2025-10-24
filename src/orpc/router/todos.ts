@@ -1,4 +1,4 @@
-import { os } from '@orpc/server'
+import { ORPCError, os } from '@orpc/server'
 import * as z from 'zod'
 
 // Agrego Tipado mediante Zod para salidas de funciones
@@ -30,7 +30,19 @@ export const getTodoById = os
 export const addTodo = authed
   .input(z.object({ name: z.string() }))
   .output(TodoSchema)
-  .handler(({ input, context }) => {
+  .errors({
+    BAD_REQUEST: {
+      message: 'Simulated ORPC error adding todo',
+      status: 400,
+    },
+  })
+  .handler(({ input, context, errors }) => {
+    // throw new Error('Simulated error adding todo') // Simulacion de error -> llega OK al addTodoError tomado desde React Query
+    // throw new ORPCError('BAD_REQUEST', {
+    //   message: 'Simulated ORPC error adding todo',
+    // }) // -> llega OK al addTodoError tomado desde React Query
+    // throw errors.BAD_REQUEST() // -> llega OK al addTodoError tomado desde React Query
+
     console.log('User from context:', context.user) // Accediendo al usuario del contexto
 
     const newTodo = { id: todos.length + 1, name: input.name }

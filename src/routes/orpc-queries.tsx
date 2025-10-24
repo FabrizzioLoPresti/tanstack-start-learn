@@ -15,7 +15,7 @@ function RouteComponent() {
     staleTime: 1000 * 60 * 5, // 5 minutes
   })
 
-  const { mutate: addTodo } = useMutation({
+  const { mutate: addTodo, error: addTodoError } = useMutation({
     mutationFn: (newTodo: { name: string }) => orpc.addTodo.call(newTodo), // Ejemplo de mutacion para agregar un nuevo todo
     onSuccess: () => {
       // queryClient.invalidateQueries({ queryKey: ['orpc-queries-data''] })orpc-queries-data'
@@ -66,6 +66,9 @@ function RouteComponent() {
       >
         Add Todo
       </button>
+      {addTodoError && (
+        <p>Error adding todo: {(addTodoError as Error).message}</p>
+      )}
       <button
         className="mt-4 ml-4 px-4 py-2 bg-yellow-500 text-white rounded"
         onClick={() => {
