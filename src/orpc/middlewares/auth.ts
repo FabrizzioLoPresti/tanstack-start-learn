@@ -26,3 +26,5 @@ const getSession = async () => {
   if (notAuthenticated) return null
   return { id: 1, name: 'John', email: 'john@example.com' }
 }
+
+export const authed = os.use(requiredAuthMiddleware)
