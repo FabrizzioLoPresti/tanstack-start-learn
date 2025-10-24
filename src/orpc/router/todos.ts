@@ -3,6 +3,7 @@ import * as z from 'zod'
 
 // Agrego Tipado mediante Zod para salidas de funciones
 import { TodoListSchema, TodoSchema } from '@/orpc/schema'
+import { requiredAuthMiddleware } from '@/orpc/middlewares/auth'
 
 const todos = [
   { id: 1, name: 'Get groceries' },
@@ -27,9 +28,12 @@ export const getTodoById = os
   })
 
 export const addTodo = os
+  .use(requiredAuthMiddleware)
   .input(z.object({ name: z.string() }))
   .output(TodoSchema)
-  .handler(({ input }) => {
+  .handler(({ input, context }) => {
+    console.log('User from context:', context.user) // Accediendo al usuario del contexto
+
     const newTodo = { id: todos.length + 1, name: input.name }
     todos.push(newTodo)
     return newTodo
